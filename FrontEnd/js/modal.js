@@ -3,6 +3,26 @@ import {dataWorks, dataCategories} from "./loginAPI.js";
 const token = sessionStorage.getItem("token");
 console.log(token);
 
+// CREATION MODAL EDITION/PUBLISH
+const header = document.querySelector('header');
+const modalNav = document.createElement("div");
+modalNav.className = "modal-nav displayModalNav";
+header.appendChild(modalNav);
+
+const edition = document.createElement("p");
+edition.className = "edition";
+edition.innerHTML = "Mode édition";
+modalNav.appendChild(edition);
+
+const iconeEdition = document.createElement("i");
+iconeEdition.className = "fa-regular fa-pen-to-square";
+edition.appendChild(iconeEdition);
+
+const btnPublish = document.createElement("button");
+btnPublish.className = "btn-publish";
+btnPublish.innerHTML = "Publier les changements";
+modalNav.appendChild(btnPublish);
+
 const adminModal = function() {
     if (token) {
         // Affichage elements
