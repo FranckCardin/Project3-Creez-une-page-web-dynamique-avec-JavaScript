@@ -34,9 +34,11 @@ const filter = document.querySelector(".filters");
 // Création du button TOUS
 const allFilter = document.createElement("button");
     allFilter.innerHTML = "Tous";
+    allFilter.className = "filter";
     allFilter.id = "0";
     filter.appendChild(allFilter);
-    
+    allFilter.focus();
+
     // Affichage des éléments avec la fonction .onclick
     allFilter.onclick = function(){
         // Reset affichage gallery
@@ -45,13 +47,13 @@ const allFilter = document.createElement("button");
         viewGallery(dataWorks);
 };
 
-// Focus sur le bouton all en vert
 
 // Création des autres buttons en fonction de leur id
 for (let i = 0; i < dataCategories.length; i++) {
     
     const btnFilter = document.createElement("button");
     btnFilter.innerHTML = dataCategories[i].name;
+    btnFilter.className = "filter";
     btnFilter.id = dataCategories[i].id;
     filter.appendChild(btnFilter);
     
@@ -69,4 +71,3 @@ for (let i = 0; i < dataCategories.length; i++) {
         viewGallery(filterByCategories);
     };
 }
-       
