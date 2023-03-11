@@ -23,43 +23,44 @@ const adminModal = function() {
         const iconeEdit = document.createElement("i");
         iconeEdit.className = "fa-regular fa-pen-to-square";
         btnEdit.appendChild(iconeEdit);
-        
+
         // Creation de l'overlay
         const overlay = document.createElement("div");
         overlay.className = "overlay";
         projets.appendChild(overlay);
         
         // Creation de la modal
-        const modal = document.createElement("aside");
-        modal.className = "modal";
-        projets.appendChild(modal);
+        const modalGallery = document.createElement("aside");
+        modalGallery.className = "modal";
+        projets.appendChild(modalGallery);
         
         // Ouverture Modal
-        const openModal = document.querySelector(".btn-edit");
-        openModal.addEventListener("click", function (event) {
+        const openModalGallery = document.querySelector(".btn-edit");
+        openModalGallery.addEventListener("click", function (event) {
             overlay.style.display = "block";
-            modal.style.display = "inline";
+            modalGallery.style.display = "inline";
         });
         
+        //MODAL GALLERY
         // Creation du contenu de la modal        
-        const closeModal = document.createElement("button");
-        closeModal.className = "close-modal";
-        modal.appendChild(closeModal);
+        const closeModalGallery = document.createElement("button");
+        closeModalGallery.className = "close-modal-gallery";
+        modalGallery.appendChild(closeModalGallery);
         
-        const iconeCloseModal = document.createElement("i");
-        iconeCloseModal.className = "fa-solid fa-xmark";
-        closeModal.appendChild(iconeCloseModal);
+        const iconeCloseModalGallery = document.createElement("i");
+        iconeCloseModalGallery.className = "fa-solid fa-xmark";
+        closeModalGallery.appendChild(iconeCloseModalGallery);
         
-        const titleModal = document.createElement("h3");
-        titleModal.className = "title";
-        titleModal.innerHTML = "Galerie Photo"
-        modal.appendChild(titleModal);
+        const titleModalGallery = document.createElement("h3");
+        titleModalGallery.className = "title-modal-gallery";
+        titleModalGallery.innerHTML = "Galerie Photo"
+        modalGallery.appendChild(titleModalGallery);
         
         
         // Recuperation des projets
         const modalContent = document.createElement("div");
         modalContent.className = "list-projects"
-        modal.appendChild(modalContent);
+        modalGallery.appendChild(modalContent);
         
         function contentModal(dataWorks) {
             for (let i = 0; i < dataWorks.length; i++) {
@@ -91,21 +92,81 @@ const adminModal = function() {
         addProjects.className = "add-project";
         addProjects.type = "submit";
         addProjects.value = "Ajouter une photo";
-        modal.appendChild(addProjects);
+        modalGallery.appendChild(addProjects);
         
         // Supprimer tous les projets
         const deleteProjects = document.createElement("a");
         deleteProjects.className = "delete-all";
         deleteProjects.innerHTML = " Supprimer la galerie"
-        modal.appendChild(deleteProjects);
+        modalGallery.appendChild(deleteProjects);
+
+        //MODAL AJOUT PROJET
+        // Creation modal ajout projet
+        const modalAddProject = document.createElement("aside");
+        modalAddProject.className = "modal";
+        projets.appendChild(modalAddProject);
+
+        const BackModalAddProject = document.createElement("button");
+        BackModalAddProject.className = "btn-back-modal-add-project";
+        modalAddProject.appendChild(BackModalAddProject);
+
+        const iconeBack = document.createElement("i");
+        iconeBack.className = "fa-solid fa-arrow-left";
+        BackModalAddProject.appendChild(iconeBack);
+
+        const closeModalAddProject = document.createElement("button");
+        closeModalAddProject.className = "close-modal-add-project";
+        modalAddProject.appendChild(closeModalAddProject);
+
+        const iconeCloseModalAddProject = document.createElement("i");
+        iconeCloseModalAddProject.className = "fa-solid fa-xmark";
+        closeModalAddProject.appendChild(iconeCloseModalAddProject);
+
+        const titleModalAddProject = document.createElement("h3");
+        titleModalAddProject.className = "title-add-project";
+        titleModalAddProject.innerHTML = "Ajout photo";
+        modalAddProject.appendChild(titleModalAddProject);
+
+
+        // Ouverture modal ajouter projet
+        const openModalAddProjet = document.querySelector(".add-project");
+        openModalAddProjet.addEventListener("click", function (event) {
+            overlay.style.display = "block";
+            modalGallery.style.display = "none";
+            modalAddProject.style.display = "inline";
+        });
+
+        // Retour modal gallery icone
+        const backModalGallery = document.querySelector(".btn-back-modal-add-project");
+        backModalGallery.addEventListener("click", function (event) {
+            overlay.style.display = "block";
+            modalGallery.style.display = "inline";
+            modalAddProject.style.display = "none";
+        });
+
         
-        // Fermeture Modal
-        const btnClose = document.querySelector(".close-modal");
-        btnClose.addEventListener("click", function (event) {
+        // Fermeture Modal Gallery par la croix
+        const btnCloseModalGallery = document.querySelector(".close-modal-gallery");
+        btnCloseModalGallery.addEventListener("click", function (event) {
             overlay.style.display = "none";
-            modal.style.display = "none";
+            modalGallery.style.display = "none";
         });
         
+        // Fermeture Modal ajouter projet par la croix
+        const btnCloseModalAddProject = document.querySelector(".close-modal-add-project");
+        btnCloseModalAddProject.addEventListener("click", function (event) {
+            overlay.style.display = "none";
+            modalAddProject.style.display = "none";
+        });
+
+        // Fermeture Modal par l'overlay
+        const overlayClose = document.querySelector(".overlay");
+        overlayClose.addEventListener("click", function (event) {
+            overlay.style.display = "none";
+            modalGallery.style.display = "none";
+            modalAddProject.style.display = "none";
+        });
+
         // Modification du login en logout
         document.getElementById("login").innerHTML = "logout";
 
