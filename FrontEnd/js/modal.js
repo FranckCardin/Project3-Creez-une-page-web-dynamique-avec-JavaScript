@@ -5,7 +5,7 @@ console.log(token);
 
 const adminModal = function() {
     if (token) {
-        // Afficher et disparaitre elements
+        // Affichage elements
         const displayModalNav = document.querySelector('.displayModalNav');
         displayModalNav.style.display = "flex";
         const displayFilters = document.querySelector(".filters");
@@ -13,7 +13,7 @@ const adminModal = function() {
         
         const projets = document.querySelector(".projets");
 
-        // Creation du bouton modifier et de l'icone
+        // Creation bouton modifier et icone
         const btnEdit = document.createElement("button");
         btnEdit.className = "modal-btn modal-js displayBtnEdit btn-edit";
         btnEdit.innerHTML = "modifier";
@@ -24,12 +24,13 @@ const adminModal = function() {
         iconeEdit.className = "fa-regular fa-pen-to-square";
         btnEdit.appendChild(iconeEdit);
 
-        // Creation de l'overlay
+        // MODAL
+        // Creation overlay
         const overlay = document.createElement("div");
         overlay.className = "overlay";
         projets.appendChild(overlay);
         
-        // Creation de la modal
+        // Creation modal
         const modalGallery = document.createElement("aside");
         modalGallery.className = "modal";
         projets.appendChild(modalGallery);
@@ -99,6 +100,10 @@ const adminModal = function() {
         deleteProjects.className = "delete-all";
         deleteProjects.innerHTML = " Supprimer la galerie"
         modalGallery.appendChild(deleteProjects);
+
+        // SUPPRESSION UN PROJET
+
+        // SUPPRESSION TOUS PROJETS
 
         //MODAL AJOUT PROJET
         // Creation modal ajout projet
