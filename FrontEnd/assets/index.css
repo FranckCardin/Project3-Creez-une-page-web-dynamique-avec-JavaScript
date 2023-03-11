@@ -332,6 +332,29 @@ input {
 
 }
 
+/* INTRODUCTION EDIT */
+
+.btn-edit-img {
+    display : none;
+    border: none;
+    background: white;
+    font-family: 'Work Sans';
+    font-style: normal;
+    font-size:  14px;
+    margin: 10px 50px;
+    cursor: pointer;
+}
+
+.btn-edit-article {
+    display : none;
+    border: none;
+    background: white;
+    font-family: 'Work Sans';
+    font-style: normal;
+    font-size:  14px;
+    cursor: pointer;
+}
+
 /* MODAL */
 /* BOUTON MODIFIER */
 .projets {
@@ -357,7 +380,7 @@ input {
     cursor: pointer;
 }
 
-.projets .fa-pen-to-square{
+.fa-pen-to-square{
     padding: 5px;
 }
 
