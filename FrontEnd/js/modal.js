@@ -23,26 +23,52 @@ btnPublish.className = "btn-publish";
 btnPublish.innerHTML = "Publier les changements";
 modalNav.appendChild(btnPublish);
 
+// CREATION BOUTON MODIFIER INTRODUCTION
+const portofolioImg = document.querySelector("#introduction figure")
+const btnEditIntroImg = document.createElement("button");
+btnEditIntroImg.className = "modal-btn modal-js displayBtnEditIntroImg btn-edit-img";
+btnEditIntroImg.innerHTML = "modifier";
+portofolioImg.appendChild(btnEditIntroImg);
+
+const iconeEditImg = document.createElement("i");
+iconeEditImg.className = "fa-regular fa-pen-to-square";
+btnEditIntroImg.appendChild(iconeEditImg);
+
+const portofolioArticle = document.querySelector("#introduction article")
+const btnEditModalIntroArticle = document.createElement("button");
+btnEditModalIntroArticle.className = "modal-btn modal-js displayBtnEditIntroArticle btn-edit-article";
+btnEditModalIntroArticle.innerHTML = "modifier";
+portofolioArticle.appendChild(btnEditModalIntroArticle);
+
+const iconeEditArticle = document.createElement("i");
+iconeEditArticle.className = "fa-regular fa-pen-to-square";
+btnEditModalIntroArticle.appendChild(iconeEditArticle);
+
+// FONCTION UTILISATEUR CONNECTER ET AFFICHAGE MODAL
 const adminModal = function() {
     if (token) {
         // Affichage elements
         const displayModalNav = document.querySelector('.displayModalNav');
         displayModalNav.style.display = "flex";
+        const displayModalEditImg = document.querySelector('.displayBtnEditIntroImg');
+        displayModalEditImg.style.display = "flex";
+        const displayModalEditArticle = document.querySelector('.displayBtnEditIntroArticle');
+        displayModalEditArticle.style.display = "flex";
         const displayFilters = document.querySelector(".filters");
         displayFilters.style.display = "none";
         
         const projets = document.querySelector(".projets");
 
         // Creation bouton modifier et icone
-        const btnEdit = document.createElement("button");
-        btnEdit.className = "modal-btn modal-js displayBtnEdit btn-edit";
-        btnEdit.innerHTML = "modifier";
-        btnEdit.style.display = "flex";
-        projets.appendChild(btnEdit);
+        const btnEditModal = document.createElement("button");
+        btnEditModal.className = "modal-btn modal-js displayBtnEdit btn-edit";
+        btnEditModal.innerHTML = "modifier";
+        btnEditModal.style.display = "flex";
+        projets.appendChild(btnEditModal);
         
         const iconeEdit = document.createElement("i");
         iconeEdit.className = "fa-regular fa-pen-to-square";
-        btnEdit.appendChild(iconeEdit);
+        btnEditModal.appendChild(iconeEdit);
 
         // MODAL
         // Creation overlay
