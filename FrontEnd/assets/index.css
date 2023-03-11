@@ -358,7 +358,7 @@ input {
     padding: 5px;
 }
 
-/* MODAL PROJET */
+/* MODAL */
 
 .overlay{
     position: fixed;
@@ -383,7 +383,9 @@ input {
     border-radius: 3px;
 }
 
-.modal .close-modal{
+/* MODAL GALLERY */
+
+.modal .close-modal-gallery{
     position: absolute;
 	left: 550px;
 	top: 30px;
@@ -394,7 +396,7 @@ input {
     cursor: pointer;
 }
 
-.modal .title{
+.modal .title-modal-gallery{
     display: flex;
     justify-content: center;
     font-family: 'Work Sans';
@@ -454,4 +456,35 @@ input {
 	left: 58px;
 	color: white;
 	background-color: black;
+}
+
+/* MODAL ADD PROJECT */
+
+.modal .btn-back-modal-add-project{
+    position: absolute;
+	left: 20px;
+	top: 30px;
+    border: none;
+    background: #fff;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.modal .close-modal-add-project{
+    position: absolute;
+	left: 550px;
+	top: 30px;
+    border: none;
+    background: #fff;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.modal .title-add-project{
+    display: flex;
+    justify-content: center;
+    font-family: 'Work Sans';
+    font-style: normal;
+    font-size: 26px;
+    padding: 80px 0px 50px 0px;
 }
