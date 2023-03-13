@@ -314,6 +314,7 @@ input {
 .modal-nav .edition {
     display: flex;
     flex-direction: row-reverse;
+    align-items: center;
     background: black;
     color: #ffffff;
 }
@@ -482,6 +483,7 @@ input {
 	left: 58px;
 	color: white;
 	background-color: black;
+    cursor: pointer;
 }
 
 /* MODAL ADD PROJECT */
