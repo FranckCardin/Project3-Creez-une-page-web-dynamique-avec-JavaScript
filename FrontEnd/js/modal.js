@@ -1,7 +1,7 @@
 import {dataWorks, dataCategories} from "./loginAPI.js";
 
 const token = sessionStorage.getItem("token");
-console.log(token);
+
 
 // CREATION MODAL EDITION/PUBLISH
 const header = document.querySelector('header');
@@ -26,7 +26,7 @@ modalNav.appendChild(btnPublish);
 // CREATION BOUTON MODIFIER INTRODUCTION
 const portofolioImg = document.querySelector("#introduction figure")
 const btnEditIntroImg = document.createElement("button");
-btnEditIntroImg.className = "modal-btn modal-js displayBtnEditIntroImg btn-edit-img";
+btnEditIntroImg.className = "modal-btn displayBtnEditIntroImg btn-edit-img";
 btnEditIntroImg.innerHTML = "modifier";
 portofolioImg.appendChild(btnEditIntroImg);
 
@@ -36,7 +36,7 @@ btnEditIntroImg.appendChild(iconeEditImg);
 
 const portofolioArticle = document.querySelector("#introduction article")
 const btnEditModalIntroArticle = document.createElement("button");
-btnEditModalIntroArticle.className = "modal-btn modal-js displayBtnEditIntroArticle btn-edit-article";
+btnEditModalIntroArticle.className = "modal-btn displayBtnEditIntroArticle btn-edit-article";
 btnEditModalIntroArticle.innerHTML = "modifier";
 portofolioArticle.appendChild(btnEditModalIntroArticle);
 
@@ -61,7 +61,7 @@ const adminModal = function() {
 
         // Creation bouton modifier et icone
         const btnEditModal = document.createElement("button");
-        btnEditModal.className = "modal-btn modal-js displayBtnEdit btn-edit";
+        btnEditModal.className = "modal-btn displayBtnEdit btn-edit";
         btnEditModal.innerHTML = "modifier";
         btnEditModal.style.display = "flex";
         projets.appendChild(btnEditModal);
@@ -122,10 +122,33 @@ const adminModal = function() {
                     imageElement.alt = dataWorks[i].title;
                     dataGallery.appendChild(imageElement);
                 
-                //Creation icone poubelle
+                //Creation icone poubelle + function suppression un projet
                 const btnBin = document.createElement("i");
-                btnBin.className = "fa-solid fa-trash-can";
-                dataGallery.appendChild(btnBin);
+                    btnBin.className = "fa-solid fa-trash-can";
+                    btnBin.id = dataWorks[i].id;
+                    dataGallery.appendChild(btnBin);
+                    // SUPPRESSION UN PROJET
+                    btnBin.addEventListener("click", function (event){
+                        const confirmDelete = confirm("Voulez-vous vraiment supprimer ce projet ?");
+                        if(confirmDelete){
+                            fetch("http://localhost:5678/api/works/" + btnBin.id, {
+                            method: 'DELETE',
+                            headers: { Authorization: 'Bearer ' + token},
+                            })
+                            .then((response) => {
+                                if (response.ok) {
+                                    alert("Projet supprimé avec succès !");
+                                    contentModal(dataWorks);
+                                }else{
+                                    throw new Error("Erreur lors de la suppression du projet");
+                                }
+                            })
+                        }
+                    });
+
+                //const iconArrow = document.createElement("i");
+                    //iconArrow.className = "fa-solid fa-arrows-up-down-left-right";
+                    //imageElement[1].appendChild(iconArrow);
                 
                 const nameElement = document.createElement("figcaption");
                     nameElement.innerText = "éditer";
@@ -136,101 +159,97 @@ const adminModal = function() {
         
         // Ajouter un projet
         const addProjects = document.createElement("input");
-        addProjects.className = "add-project";
-        addProjects.type = "submit";
-        addProjects.value = "Ajouter une photo";
-        modalGallery.appendChild(addProjects);
+            addProjects.className = "add-project";
+            addProjects.type = "submit";
+            addProjects.value = "Ajouter une photo";
+            modalGallery.appendChild(addProjects);
         
         // Supprimer tous les projets
         const deleteProjects = document.createElement("a");
-        deleteProjects.className = "delete-all";
-        deleteProjects.innerHTML = " Supprimer la galerie"
-        modalGallery.appendChild(deleteProjects);
+            deleteProjects.className = "delete-all";
+            deleteProjects.innerHTML = " Supprimer la galerie"
+            modalGallery.appendChild(deleteProjects);
 
-        // SUPPRESSION UN PROJET
-
-        // SUPPRESSION TOUS PROJETS
-
-        //MODAL AJOUT PROJET
+        // MODAL AJOUT PROJET
         // Creation modal ajout projet
         const modalAddProject = document.createElement("aside");
-        modalAddProject.className = "modal";
-        projets.appendChild(modalAddProject);
+            modalAddProject.className = "modal";
+            projets.appendChild(modalAddProject);
 
         const BackModalAddProject = document.createElement("button");
-        BackModalAddProject.className = "btn-back-modal-add-project";
-        modalAddProject.appendChild(BackModalAddProject);
+            BackModalAddProject.className = "btn-back-modal-add-project";
+            modalAddProject.appendChild(BackModalAddProject);
 
         const iconeBack = document.createElement("i");
-        iconeBack.className = "fa-solid fa-arrow-left";
-        BackModalAddProject.appendChild(iconeBack);
+            iconeBack.className = "fa-solid fa-arrow-left";
+            BackModalAddProject.appendChild(iconeBack);
 
         const closeModalAddProject = document.createElement("button");
-        closeModalAddProject.className = "close-modal-add-project";
-        modalAddProject.appendChild(closeModalAddProject);
+            closeModalAddProject.className = "close-modal-add-project";
+            modalAddProject.appendChild(closeModalAddProject);
 
         const iconeCloseModalAddProject = document.createElement("i");
-        iconeCloseModalAddProject.className = "fa-solid fa-xmark";
-        closeModalAddProject.appendChild(iconeCloseModalAddProject);
+            iconeCloseModalAddProject.className = "fa-solid fa-xmark";
+            closeModalAddProject.appendChild(iconeCloseModalAddProject);
 
         const titleModalAddProject = document.createElement("h3");
-        titleModalAddProject.className = "title-add-project";
-        titleModalAddProject.innerHTML = "Ajout photo";
-        modalAddProject.appendChild(titleModalAddProject);
+            titleModalAddProject.className = "title-add-project";
+            titleModalAddProject.innerHTML = "Ajout photo";
+            modalAddProject.appendChild(titleModalAddProject);
 
 
         // Ouverture modal ajouter projet
         const openModalAddProjet = document.querySelector(".add-project");
-        openModalAddProjet.addEventListener("click", function (event) {
-            overlay.style.display = "block";
-            modalGallery.style.display = "none";
-            modalAddProject.style.display = "inline";
-        });
+            openModalAddProjet.addEventListener("click", function (event) {
+                overlay.style.display = "block";
+                modalGallery.style.display = "none";
+                modalAddProject.style.display = "inline";
+            });
 
         // Retour modal gallery icone
         const backModalGallery = document.querySelector(".btn-back-modal-add-project");
-        backModalGallery.addEventListener("click", function (event) {
-            overlay.style.display = "block";
-            modalGallery.style.display = "inline";
-            modalAddProject.style.display = "none";
-        });
+            backModalGallery.addEventListener("click", function (event) {
+                overlay.style.display = "block";
+                modalGallery.style.display = "inline";
+                modalAddProject.style.display = "none";
+            });
 
         
         // Fermeture Modal Gallery par la croix
         const btnCloseModalGallery = document.querySelector(".close-modal-gallery");
-        btnCloseModalGallery.addEventListener("click", function (event) {
-            overlay.style.display = "none";
-            modalGallery.style.display = "none";
-        });
+            btnCloseModalGallery.addEventListener("click", function (event) {
+                overlay.style.display = "none";
+                modalGallery.style.display = "none";
+            });
         
         // Fermeture Modal ajouter projet par la croix
         const btnCloseModalAddProject = document.querySelector(".close-modal-add-project");
-        btnCloseModalAddProject.addEventListener("click", function (event) {
-            overlay.style.display = "none";
-            modalAddProject.style.display = "none";
-        });
+            btnCloseModalAddProject.addEventListener("click", function (event) {
+                overlay.style.display = "none";
+                modalAddProject.style.display = "none";
+            });
 
         // Fermeture Modal par l'overlay
         const overlayClose = document.querySelector(".overlay");
-        overlayClose.addEventListener("click", function (event) {
-            overlay.style.display = "none";
-            modalGallery.style.display = "none";
-            modalAddProject.style.display = "none";
-        });
+            overlayClose.addEventListener("click", function (event) {
+                overlay.style.display = "none";
+                modalGallery.style.display = "none";
+                modalAddProject.style.display = "none";
+            });
 
         // Modification du login en logout
         document.getElementById("login").innerHTML = "logout";
 
         // Effacement du sessionStorage quand l'utilisateur se déconnecte 
         document.getElementById("login").addEventListener("click", function logout(){
-        window.sessionStorage.removeItem('token');
-        window.sessionStorage.removeItem('userId');
-        location.href = "../html/index.html";
+            window.sessionStorage.removeItem('token');
+            window.sessionStorage.removeItem('userId');
+            location.href = "../html/index.html";
         });
-    }else{
+        }else{
         document.getElementById("login").addEventListener("click", function login(){
-        location.href = "../html/login.html";
-    });
+            location.href = "../html/login.html";
+        });
     }
 };
 
