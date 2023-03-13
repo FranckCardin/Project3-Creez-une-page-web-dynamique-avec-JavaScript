@@ -1,7 +1,6 @@
 import {dataWorks, dataCategories} from "./loginAPI.js";
 
 const token = sessionStorage.getItem("token");
-console.log(token);
 
 // GALLERY
 // Récupération de l'élément du DOM qui accueillera la gallery
