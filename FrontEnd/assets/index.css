@@ -59,7 +59,7 @@ header {
 }
 
 header h1, header nav{
-        margin-top: 100px;
+        margin-top: 40px;
 
 }
 section {
@@ -400,11 +400,12 @@ input {
 .modal{
     position:absolute;
     display: none;
+    flex-direction: column;
     top: 80%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 600px;
-    height: 750px;
+    width: 500px;
+    height: 700px;
     background-color: #fff;
     box-shadow: grey 0px 2px 8px 0px;
     border-radius: 3px;
@@ -414,7 +415,7 @@ input {
 
 .modal .close-modal-gallery{
     position: absolute;
-	left: 550px;
+	left: 450px;
 	top: 30px;
     font-weight: bold;
     border: none;
@@ -433,29 +434,31 @@ input {
 }
 
 .list-projects{
-    display: flex;
-	flex-wrap: wrap;
-	width: 430px;
-	margin-left: 100px;
+    display: grid;
+	grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin: 0px 60px;
 	padding-bottom: 32px;
     border-bottom: 1px solid #B3B3B3;
 }
 
 .modal figure {
-	width: 77px;
-	height: 135px;
+    position: relative;
+	width: 100%;
+	height: auto;
 	margin: 0px 4px;
 }
 
 .modal img {
-	width: 77px;
-	height: 107px;
+	width: 100%;
+	height: auto;
 	object-fit: cover;
 }
 
 .modal figcaption {
 	font-size: 12px;
-	margin-top: -20px;
+	margin-top: 3px;
+	margin-bottom: 5px;
 }
 
 .modal .add-project{
@@ -475,15 +478,23 @@ input {
 }
 
 .modal .fa-trash-can {
-	position: relative;
-    padding: 2px;
+	position: absolute;
+    text-align: center;
+    vertical-align: middle;
+    padding: 3px;
+    padding-bottom: 1px;
     width: 12px;
-    height: 15px;
-	top: -105px;
-	left: 58px;
+    height: 12px;
+	top: 0;
+	right: 0;
 	color: white;
 	background-color: black;
+    border-radius: 5px;
     cursor: pointer;
+}
+
+.list-projects .fa-solid{
+    font-size: 8px;
 }
 
 /* MODAL ADD PROJECT */
@@ -515,4 +526,15 @@ input {
     font-style: normal;
     font-size: 26px;
     padding: 80px 0px 50px 0px;
+}
+
+.modal .close-modal-add-project{
+    position: absolute;
+	left: 450px;
+	top: 30px;
+    font-weight: bold;
+    border: none;
+    background: #fff;
+    font-size: 20px;
+    cursor: pointer;
 }
