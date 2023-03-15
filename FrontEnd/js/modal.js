@@ -2,7 +2,6 @@ import {dataWorks, dataCategories} from "./loginAPI.js";
 
 const token = sessionStorage.getItem("token");
 
-
 // CREATION MODAL EDITION/PUBLISH
 const header = document.querySelector('header');
 const modalNav = document.createElement("div");
@@ -38,7 +37,7 @@ const portofolioArticle = document.querySelector("#introduction article")
 const btnEditModalIntroArticle = document.createElement("button");
 btnEditModalIntroArticle.className = "modal-btn displayBtnEditIntroArticle btn-edit-article";
 btnEditModalIntroArticle.innerHTML = "modifier";
-portofolioArticle.appendChild(btnEditModalIntroArticle);
+portofolioArticle.prepend(btnEditModalIntroArticle);
 
 const iconeEditArticle = document.createElement("i");
 iconeEditArticle.className = "fa-regular fa-pen-to-square";
@@ -49,6 +48,7 @@ const adminModal = function() {
     if (token) {
         // Affichage elements
         const displayModalNav = document.querySelector('.displayModalNav');
+        header.style.marginTop = "60px";
         displayModalNav.style.display = "flex";
         const displayModalEditImg = document.querySelector('.displayBtnEditIntroImg');
         displayModalEditImg.style.display = "flex";
@@ -144,11 +144,8 @@ const adminModal = function() {
                                 }
                             })
                         }
-                    });
 
-                //const iconArrow = document.createElement("i");
-                    //iconArrow.className = "fa-solid fa-arrows-up-down-left-right";
-                    //imageElement[1].appendChild(iconArrow);
+                    });
                 
                 const nameElement = document.createElement("figcaption");
                     nameElement.innerText = "éditer";
@@ -156,6 +153,12 @@ const adminModal = function() {
             }
         }
         contentModal(dataWorks);
+
+        /*
+        const iconArrow = document.createElement("i");
+                iconArrow.className = "fa-solid fa-arrows-up-down-left-right";
+                dataGallery.firstChild.appendChild(iconArrow);
+        */
         
         // Ajouter un projet
         const addProjects = document.createElement("input");
@@ -198,12 +201,59 @@ const adminModal = function() {
             modalAddProject.appendChild(titleModalAddProject);
 
 
+        const contentModalAddProject = document.querySelector(".content-add-project");
+            modalAddProject.appendChild(contentModalAddProject);
+
+        /*
+        const contentModalAddProject = document.createElement("div")
+            contentModalAddProject.className = "add-project";
+            modalAddProject.appendChild(contentModalAddProject);
+
+        const formAddProject = document.createElement("form");
+            formAddProject.className = "form-add-project";
+            formAddProject.enctype = "multipart/form/-data";
+            formAddProject.method = "post";
+            contentModalAddProject.appendChild(formAddProject);
+
+        const divAddPhoto = document.createElement("div");
+            divAddPhoto.className = "add-photo";
+            formAddProject.appendChild(divAddPhoto);
+
+        const iconPng = document.createElement("i");
+            iconPng.className = "fa-regular fa-image";
+            divAddPhoto.prepend(iconPng);
+
+        const labelAddPhoto = document.createElement("label");
+            labelAddPhoto.id = "label-add-photo";
+            labelAddPhoto.for = "form-photo";
+            labelAddPhoto.innerHTML = "+ Ajouter photo";
+            divAddPhoto.appendChild(labelAddPhoto);
+
+        const inputAddPhoto = document.createElement("input");
+            inputAddPhoto.id = "form-photo";
+            inputAddPhoto.type = "file";
+            inputAddPhoto.accept = "image/jpeg";
+            inputAddPhoto.accept = "image/png";
+            labelAddPhoto.appendChild(inputAddPhoto);
+
+        const spanAddPhoto = document.createElement("span");
+            spanAddPhoto.className = "text-add-photo";
+            spanAddPhoto.innerText = "jpg, png : 4mo max"
+            labelAddPhoto.appendChild(spanAddPhoto);
+
+        */
+
+
+
+
+
+            // OUVERTURE ET FERMETURE MODAL
         // Ouverture modal ajouter projet
         const openModalAddProjet = document.querySelector(".add-project");
             openModalAddProjet.addEventListener("click", function (event) {
                 overlay.style.display = "block";
                 modalGallery.style.display = "none";
-                modalAddProject.style.display = "inline";
+                modalAddProject.style.display = "flex";
             });
 
         // Retour modal gallery icone
