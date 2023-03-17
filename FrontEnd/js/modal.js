@@ -196,56 +196,76 @@ const adminModal = function() {
             closeModalAddProject.appendChild(iconeCloseModalAddProject);
 
         const titleModalAddProject = document.createElement("h3");
-            titleModalAddProject.className = "title-add-project";
+            titleModalAddProject.className = "title-modal-add-project";
             titleModalAddProject.innerHTML = "Ajout photo";
             modalAddProject.appendChild(titleModalAddProject);
 
-
-        const contentModalAddProject = document.querySelector(".content-add-project");
-            modalAddProject.appendChild(contentModalAddProject);
-
-        /*
-        const contentModalAddProject = document.createElement("div")
-            contentModalAddProject.className = "add-project";
-            modalAddProject.appendChild(contentModalAddProject);
-
         const formAddProject = document.createElement("form");
             formAddProject.className = "form-add-project";
-            formAddProject.enctype = "multipart/form/-data";
-            formAddProject.method = "post";
-            contentModalAddProject.appendChild(formAddProject);
+            modalAddProject.appendChild(formAddProject);
 
-        const divAddPhoto = document.createElement("div");
-            divAddPhoto.className = "add-photo";
-            formAddProject.appendChild(divAddPhoto);
+        const contentAddPhoto = document.createElement("div");
+            contentAddPhoto.className = "content-add-photo";
+            formAddProject.appendChild(contentAddPhoto);
 
-        const iconPng = document.createElement("i");
-            iconPng.className = "fa-regular fa-image";
-            divAddPhoto.prepend(iconPng);
+        const iconAddPhoto = document.createElement("i");
+            iconAddPhoto.className = "fa regular fa-image icon-add-photo";
+            contentAddPhoto.appendChild(iconAddPhoto);
 
         const labelAddPhoto = document.createElement("label");
-            labelAddPhoto.id = "label-add-photo";
-            labelAddPhoto.for = "form-photo";
+            labelAddPhoto.className = "label-add-photo";
+            labelAddPhoto.for = "input-add-photo";
             labelAddPhoto.innerHTML = "+ Ajouter photo";
-            divAddPhoto.appendChild(labelAddPhoto);
+            contentAddPhoto.appendChild(labelAddPhoto);
 
         const inputAddPhoto = document.createElement("input");
-            inputAddPhoto.id = "form-photo";
+            inputAddPhoto.id = "input-add-photo";
             inputAddPhoto.type = "file";
             inputAddPhoto.accept = "image/jpeg";
             inputAddPhoto.accept = "image/png";
-            labelAddPhoto.appendChild(inputAddPhoto);
+            contentAddPhoto.appendChild(inputAddPhoto);
 
-        const spanAddPhoto = document.createElement("span");
-            spanAddPhoto.className = "text-add-photo";
-            spanAddPhoto.innerText = "jpg, png : 4mo max"
-            labelAddPhoto.appendChild(spanAddPhoto);
+        const descriptionAddPhoto = document.createElement("p");
+            descriptionAddPhoto.className = "description-add-photo";
+            descriptionAddPhoto.innerHTML = "jpg, png : 4mo max";
+            contentAddPhoto.appendChild(descriptionAddPhoto);
 
-        */
+        const labelTitle = document.createElement("label");
+            labelTitle.className = "title-add-project";
+            labelTitle.for = "title-add-project";
+            labelTitle.innerHTML = "Titre";
+            formAddProject.appendChild(labelTitle);
 
+        const inputTitle = document.createElement("input");
+            inputTitle.id = "title-add-project";
+            inputTitle.type = "text";
+            inputTitle.required = true;
+            formAddProject.appendChild(inputTitle);
 
+        const labelCategorie = document.createElement("label");
+            labelCategorie.className = "categorie-add-project";
+            labelCategorie.for = "categorie-add-project";
+            labelCategorie.innerHTML = "Catégorie";
+            formAddProject.appendChild(labelCategorie);
 
+        const selectCategorie = document.createElement("select");
+            selectCategorie.id = "categorie-add-project";
+            formAddProject.appendChild(selectCategorie);
 
+        for (let i = 0; i < dataCategories.length; i++) {
+            // Création des balises "OPTION".
+            const categoryListModaleOptions = document.createElement("option");
+            categoryListModaleOptions.value = dataCategories[i].id;
+            categoryListModaleOptions.innerText = dataCategories[i].name;
+            // Rattachement des balises "OPTION" à la liste "SELECT" de la partie "Ajout de projet" de la "MODALE".
+            selectCategorie.appendChild(categoryListModaleOptions);
+        };
+
+        const inputValider = document.createElement("input");
+            inputValider.className = "input-valider";
+            inputValider.type = "submit";
+            inputValider.value = "Valider";
+            formAddProject.appendChild(inputValider);
 
             // OUVERTURE ET FERMETURE MODAL
         // Ouverture modal ajouter projet
