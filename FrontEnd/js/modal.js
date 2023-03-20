@@ -138,7 +138,6 @@ const adminModal = function() {
                             .then((response) => {
                                 if (response.ok) {
                                     alert("Projet supprimé avec succès !");
-                                    contentModal(dataWorks);
                                 }else{
                                     throw new Error("Erreur lors de la suppression du projet");
                                 }
@@ -159,15 +158,13 @@ const adminModal = function() {
                 iconArrow.className = "fa-solid fa-arrows-up-down-left-right";
                 dataGallery.firstChild.appendChild(iconArrow);
         */
-        
-        // Ajouter un projet
+
         const addProjects = document.createElement("input");
             addProjects.className = "add-project";
             addProjects.type = "submit";
             addProjects.value = "Ajouter une photo";
             modalGallery.appendChild(addProjects);
-        
-        // Supprimer tous les projets
+
         const deleteProjects = document.createElement("a");
             deleteProjects.className = "delete-all";
             deleteProjects.innerHTML = " Supprimer la galerie"
@@ -202,6 +199,8 @@ const adminModal = function() {
 
         const formAddProject = document.createElement("form");
             formAddProject.className = "form-add-project";
+            formAddProject.enctype = "multipart/form-data";
+            formAddProject.method = "post";
             modalAddProject.appendChild(formAddProject);
 
         const contentAddPhoto = document.createElement("div");
@@ -214,15 +213,15 @@ const adminModal = function() {
 
         const labelAddPhoto = document.createElement("label");
             labelAddPhoto.className = "label-add-photo";
-            labelAddPhoto.for = "input-add-photo";
+            labelAddPhoto.setAttribute("for", "input-add-photo");
             labelAddPhoto.innerHTML = "+ Ajouter photo";
             contentAddPhoto.appendChild(labelAddPhoto);
 
         const inputAddPhoto = document.createElement("input");
             inputAddPhoto.id = "input-add-photo";
             inputAddPhoto.type = "file";
-            inputAddPhoto.accept = "image/jpeg";
-            inputAddPhoto.accept = "image/png";
+            inputAddPhoto.accept = ".jpeg, .png";
+            inputAddPhoto.setAttribute("max-size", "4000000");
             contentAddPhoto.appendChild(inputAddPhoto);
 
         const descriptionAddPhoto = document.createElement("p");
@@ -230,9 +229,31 @@ const adminModal = function() {
             descriptionAddPhoto.innerHTML = "jpg, png : 4mo max";
             contentAddPhoto.appendChild(descriptionAddPhoto);
 
+            // preview de l'image
+        inputAddPhoto.addEventListener("change", function () {
+            if (inputAddPhoto.files && inputAddPhoto.files[0]) {
+                const reader = new FileReader();
+                const previewImg = document.createElement("img");
+                    previewImg.className = "preview-img";
+
+                reader.onload = event => {
+                    previewImg.src = event.target.result;
+                    previewImg.style.height = "170px";
+                    previewImg.style.width = "150px";
+                };
+
+                iconAddPhoto.style.display = "none";
+                labelAddPhoto.style.display = "none";
+                inputAddPhoto.style.display = "none";
+                descriptionAddPhoto.style.display = "none";
+                reader.readAsDataURL(inputAddPhoto.files[0]);
+                contentAddPhoto.appendChild(previewImg);
+            }
+        });
+
         const labelTitle = document.createElement("label");
             labelTitle.className = "title-add-project";
-            labelTitle.for = "title-add-project";
+            labelTitle.setAttribute("for", "title-add-project");
             labelTitle.innerHTML = "Titre";
             formAddProject.appendChild(labelTitle);
 
@@ -252,12 +273,14 @@ const adminModal = function() {
             selectCategorie.id = "categorie-add-project";
             formAddProject.appendChild(selectCategorie);
 
+        // Ajout d'une option vide
+        const emptyFirstOption = document.createElement("option");
+        selectCategorie.appendChild(emptyFirstOption);
         for (let i = 0; i < dataCategories.length; i++) {
             // Création des balises "OPTION".
             const categoryListModaleOptions = document.createElement("option");
             categoryListModaleOptions.value = dataCategories[i].id;
             categoryListModaleOptions.innerText = dataCategories[i].name;
-            // Rattachement des balises "OPTION" à la liste "SELECT" de la partie "Ajout de projet" de la "MODALE".
             selectCategorie.appendChild(categoryListModaleOptions);
         };
 
@@ -266,6 +289,41 @@ const adminModal = function() {
             inputValider.type = "submit";
             inputValider.value = "Valider";
             formAddProject.appendChild(inputValider);
+
+            // MODIFICATION COULEUR BTN VALIDER SI CHAMPS REMPLI
+       if (contentAddPhoto.files && inputTitle.value && selectCategorie.value){
+            inputValider.style.backgroundColor ='#1D6154';
+        }
+        else{
+            inputValider.style.backgroundColor = "#A7A7A7";
+        };
+
+
+            // AJOUT D'UN PROJET
+        formAddProject.addEventListener("submit", function (event) {
+            event.preventDefault();
+            const dataForm = new FormData();
+                dataForm.append("image", inputAddPhoto.files[0]);
+                dataForm.append("title", inputTitle.value);
+                dataForm.append("category", selectCategorie.value);
+
+            fetch("http://localhost:5678/api/works", {
+                method: "POST",
+                headers: { Authorization: 'Bearer ' + token},
+                body: dataForm
+            })
+            .then((res) => {
+              if (res.ok) {
+                alert("Projet ajouté !");
+                return res.json();
+              } else {
+                throw new Error(res.statusText);
+              }
+            })
+            .catch((error) => {
+              alert(error);
+            });
+        });
 
             // OUVERTURE ET FERMETURE MODAL
         // Ouverture modal ajouter projet
