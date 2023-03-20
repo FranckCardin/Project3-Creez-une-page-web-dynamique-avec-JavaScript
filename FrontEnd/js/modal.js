@@ -208,7 +208,7 @@ const adminModal = function() {
             formAddProject.appendChild(contentAddPhoto);
 
         const iconAddPhoto = document.createElement("i");
-            iconAddPhoto.className = "fa regular fa-image icon-add-photo";
+            iconAddPhoto.className = "icon-add-photo fa-regular fa-image";
             contentAddPhoto.appendChild(iconAddPhoto);
 
         const labelAddPhoto = document.createElement("label");
