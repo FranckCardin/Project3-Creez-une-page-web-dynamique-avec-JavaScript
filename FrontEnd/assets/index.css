@@ -457,6 +457,23 @@ footer nav ul {
 	object-fit: cover;
 }
 
+.modal .icon-arrow{
+    position: absolute;
+    text-align: center;
+    vertical-align: middle;
+    padding: 3px;
+    padding-bottom: 1px;
+    width: 12px;
+    height: 12px;
+	top: 0;
+	left: 32px;
+	color: white;
+	background-color: black;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
 .modal figcaption {
 	font-size: 12px;
 	margin-top: 3px;
@@ -481,7 +498,7 @@ footer nav ul {
     color: #D65353;
 }
 
-.modal .fa-trash-can {
+.modal .icon-bin {
 	position: absolute;
     text-align: center;
     vertical-align: middle;
@@ -613,12 +630,19 @@ footer nav ul {
 	height: 51px;
 	margin-left: 40px;
     margin-bottom: 30px;
+    padding-left: 15px;
     font-family: 'Work Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 16px;
     color: #444444;
+}
+
+.bar-hr{
+    width: 80%;
+    size: 15px;
+    align-items: center;
 }
 
 .modal .input-valider{
