@@ -5,31 +5,29 @@ const token = sessionStorage.getItem("token");
 // GALLERY
 // Récupération de l'élément du DOM qui accueillera la gallery
 const gallery = document.querySelector(".gallery");
-
 //Récupération des éléments depuis l'API
 export function viewGallery(dataWorks) {
     gallery.innerHTML = "";
     for (let i = 0; i < dataWorks.length; i++) {
         // Creation de la balise figure
         const dataGallery = document.createElement("figure");
-        // Rattache la balise figure à la div gallery
-        gallery.appendChild(dataGallery);
+        gallery.appe    ndChild(dataGallery);
         
         const imageElement = document.createElement('img');
-        imageElement.src = dataWorks[i].imageUrl;
-        imageElement.alt = dataWorks[i].title;
-        dataGallery.appendChild(imageElement);
+            imageElement.src = dataWorks[i].imageUrl;
+            imageElement.alt = dataWorks[i].title;
+            dataGallery.appendChild(imageElement);
 
         const nameElement = document.createElement("figcaption");
-        nameElement.innerText = dataWorks[i].title;
-        dataGallery.appendChild(nameElement);
+            nameElement.innerText = dataWorks[i].title;
+            dataGallery.appendChild(nameElement);
     };
 };
 viewGallery(dataWorks);
 
+    // CREATION ET AFFICHAGE BOUTONS FILTRES
 // Récupération de l'élément du DOM qui accueillera les filtres
 const filter = document.querySelector(".filters");
-
 // Création du button TOUS
 const allFilter = document.createElement("button");
     allFilter.innerHTML = "Tous";
