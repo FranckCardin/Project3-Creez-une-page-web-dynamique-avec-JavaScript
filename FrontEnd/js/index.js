@@ -7,9 +7,9 @@ const token = sessionStorage.getItem("token");
 const gallery = document.querySelector(".gallery");
 
 //Récupération des éléments depuis l'API
-function viewGallery(dataWorks) {
+export function viewGallery(dataWorks) {
+    gallery.innerHTML = "";
     for (let i = 0; i < dataWorks.length; i++) {
-        
         // Creation de la balise figure
         const dataGallery = document.createElement("figure");
         // Rattache la balise figure à la div gallery
@@ -70,3 +70,5 @@ for (let i = 0; i < dataCategories.length; i++) {
         viewGallery(filterByCategories);
     };
 }
+
+
