@@ -11,7 +11,7 @@ export function viewGallery(dataWorks) {
     for (let i = 0; i < dataWorks.length; i++) {
         // Creation de la balise figure
         const dataGallery = document.createElement("figure");
-        gallery.appe    ndChild(dataGallery);
+        gallery.appendChild(dataGallery);
         
         const imageElement = document.createElement('img');
             imageElement.src = dataWorks[i].imageUrl;
