@@ -1,49 +1,50 @@
 import {dataWorks, dataCategories} from "./loginAPI.js";
+import {viewGallery} from "./index.js";
 
 const token = sessionStorage.getItem("token");
 
-// CREATION MODAL EDITION/PUBLISH
+    // CREATION MODAL EDITION/PUBLISH
 const header = document.querySelector('header');
 const modalNav = document.createElement("div");
-modalNav.className = "modal-nav displayModalNav";
-header.appendChild(modalNav);
+    modalNav.className = "modal-nav displayModalNav";
+    header.appendChild(modalNav);
 
 const edition = document.createElement("p");
-edition.className = "edition";
-edition.innerHTML = "Mode édition";
-modalNav.appendChild(edition);
+    edition.className = "edition";
+    edition.innerHTML = "Mode édition";
+    modalNav.appendChild(edition);
 
 const iconeEdition = document.createElement("i");
-iconeEdition.className = "fa-regular fa-pen-to-square";
-edition.appendChild(iconeEdition);
+    iconeEdition.className = "fa-regular fa-pen-to-square";
+    edition.appendChild(iconeEdition);
 
 const btnPublish = document.createElement("button");
-btnPublish.className = "btn-publish";
-btnPublish.innerHTML = "Publier les changements";
-modalNav.appendChild(btnPublish);
+    btnPublish.className = "btn-publish";
+    btnPublish.innerHTML = "Publier les changements";
+    modalNav.appendChild(btnPublish);
 
-// CREATION BOUTON MODIFIER INTRODUCTION
+    // CREATION BOUTON MODIFIER INTRODUCTION
 const portofolioImg = document.querySelector("#introduction figure")
 const btnEditIntroImg = document.createElement("button");
-btnEditIntroImg.className = "modal-btn displayBtnEditIntroImg btn-edit-img";
-btnEditIntroImg.innerHTML = "modifier";
-portofolioImg.appendChild(btnEditIntroImg);
+    btnEditIntroImg.className = "modal-btn displayBtnEditIntroImg btn-edit-img";
+    btnEditIntroImg.innerHTML = "modifier";
+    portofolioImg.appendChild(btnEditIntroImg);
 
 const iconeEditImg = document.createElement("i");
-iconeEditImg.className = "fa-regular fa-pen-to-square";
-btnEditIntroImg.appendChild(iconeEditImg);
+    iconeEditImg.className = "icon-edit-img fa-regular fa-pen-to-square";
+    btnEditIntroImg.appendChild(iconeEditImg);
 
 const portofolioArticle = document.querySelector("#introduction article")
 const btnEditModalIntroArticle = document.createElement("button");
-btnEditModalIntroArticle.className = "modal-btn displayBtnEditIntroArticle btn-edit-article";
-btnEditModalIntroArticle.innerHTML = "modifier";
-portofolioArticle.prepend(btnEditModalIntroArticle);
+    btnEditModalIntroArticle.className = "modal-btn displayBtnEditIntroArticle btn-edit-article";
+    btnEditModalIntroArticle.innerHTML = "modifier";
+    portofolioArticle.prepend(btnEditModalIntroArticle);
 
 const iconeEditArticle = document.createElement("i");
-iconeEditArticle.className = "fa-regular fa-pen-to-square";
-btnEditModalIntroArticle.appendChild(iconeEditArticle);
+    iconeEditArticle.className = "icon-edit-article fa-regular fa-pen-to-square";
+    btnEditModalIntroArticle.appendChild(iconeEditArticle);
 
-// FONCTION UTILISATEUR CONNECTER ET AFFICHAGE MODAL
+    // FONCTION UTILISATEUR CONNECTER ET AFFICHAGE MODAL
 const adminModal = function() {
     if (token) {
         // Affichage elements
@@ -67,7 +68,7 @@ const adminModal = function() {
         projets.appendChild(btnEditModal);
         
         const iconeEdit = document.createElement("i");
-        iconeEdit.className = "fa-regular fa-pen-to-square";
+        iconeEdit.className = "icon-edit fa-regular fa-pen-to-square";
         btnEditModal.appendChild(iconeEdit);
 
         // MODAL
@@ -95,7 +96,7 @@ const adminModal = function() {
         modalGallery.appendChild(closeModalGallery);
         
         const iconeCloseModalGallery = document.createElement("i");
-        iconeCloseModalGallery.className = "fa-solid fa-xmark";
+        iconeCloseModalGallery.className = "icon-close-modal-gallery fa-solid fa-xmark";
         closeModalGallery.appendChild(iconeCloseModalGallery);
         
         const titleModalGallery = document.createElement("h3");
@@ -110,10 +111,11 @@ const adminModal = function() {
         modalGallery.appendChild(modalContent);
         
         function contentModal(dataWorks) {
+            modalContent.innerHTML = "";
             for (let i = 0; i < dataWorks.length; i++) {
-                
                 // Creation de la balise figure
                 const dataGallery = document.createElement("figure");
+                    dataGallery.id = dataWorks[i].id;
                 // Rattache la balise figure à la div gallery
                     modalContent.appendChild(dataGallery);
                 
@@ -123,41 +125,40 @@ const adminModal = function() {
                     dataGallery.appendChild(imageElement);
                 
                 //Creation icone poubelle + function suppression un projet
-                const btnBin = document.createElement("i");
-                    btnBin.className = "fa-solid fa-trash-can";
-                    btnBin.id = dataWorks[i].id;
-                    dataGallery.appendChild(btnBin);
+                const iconBin = document.createElement("i");
+                    iconBin.className = "icon-bin fa-solid fa-trash-can";
+                    iconBin.id = dataWorks[i].id;
+                    dataGallery.appendChild(iconBin);
                     // SUPPRESSION UN PROJET
-                    btnBin.addEventListener("click", function (event){
+                    iconBin.addEventListener("click", function (event){
                         const confirmDelete = confirm("Voulez-vous vraiment supprimer ce projet ?");
                         if(confirmDelete){
-                            fetch("http://localhost:5678/api/works/" + btnBin.id, {
+                            fetch("http://localhost:5678/api/works/" + iconBin.id, {
                             method: 'DELETE',
                             headers: { Authorization: 'Bearer ' + token},
                             })
                             .then((response) => {
                                 if (response.ok) {
-                                    alert("Projet supprimé avec succès !");
+                                getWorksGallery();
                                 }else{
                                     throw new Error("Erreur lors de la suppression du projet");
                                 }
                             })
+                            modalContent.removeChild(document.getElementById(dataWorks[i].id));
                         }
 
                     });
+                const iconArrow = document.createElement("i");
+                    iconArrow.className = "icon-arrow fa-solid fa-arrows-up-down-left-right";
+                    modalContent.firstChild.appendChild(iconArrow);
                 
                 const nameElement = document.createElement("figcaption");
                     nameElement.innerText = "éditer";
                     dataGallery.appendChild(nameElement);
             }
+
         }
         contentModal(dataWorks);
-
-        /*
-        const iconArrow = document.createElement("i");
-                iconArrow.className = "fa-solid fa-arrows-up-down-left-right";
-                dataGallery.firstChild.appendChild(iconArrow);
-        */
 
         const addProjects = document.createElement("input");
             addProjects.className = "add-project";
@@ -170,7 +171,7 @@ const adminModal = function() {
             deleteProjects.innerHTML = " Supprimer la galerie"
             modalGallery.appendChild(deleteProjects);
 
-        // MODAL AJOUT PROJET
+            // MODAL AJOUT PROJET
         // Creation modal ajout projet
         const modalAddProject = document.createElement("aside");
             modalAddProject.className = "modal";
@@ -181,7 +182,7 @@ const adminModal = function() {
             modalAddProject.appendChild(BackModalAddProject);
 
         const iconeBack = document.createElement("i");
-            iconeBack.className = "fa-solid fa-arrow-left";
+            iconeBack.className = "fa-solid fa-arrow-left icon-back";
             BackModalAddProject.appendChild(iconeBack);
 
         const closeModalAddProject = document.createElement("button");
@@ -189,7 +190,7 @@ const adminModal = function() {
             modalAddProject.appendChild(closeModalAddProject);
 
         const iconeCloseModalAddProject = document.createElement("i");
-            iconeCloseModalAddProject.className = "fa-solid fa-xmark";
+            iconeCloseModalAddProject.className = "icon-close-modal-add-project fa-solid fa-xmark";
             closeModalAddProject.appendChild(iconeCloseModalAddProject);
 
         const titleModalAddProject = document.createElement("h3");
@@ -229,7 +230,7 @@ const adminModal = function() {
             descriptionAddPhoto.innerHTML = "jpg, png : 4mo max";
             contentAddPhoto.appendChild(descriptionAddPhoto);
 
-            // preview de l'image
+        // Preview de l'image
         inputAddPhoto.addEventListener("change", function () {
             if (inputAddPhoto.files && inputAddPhoto.files[0]) {
                 const reader = new FileReader();
@@ -250,6 +251,7 @@ const adminModal = function() {
                 contentAddPhoto.appendChild(previewImg);
             }
         });
+
 
         const labelTitle = document.createElement("label");
             labelTitle.className = "title-add-project";
@@ -284,29 +286,51 @@ const adminModal = function() {
             selectCategorie.appendChild(categoryListModaleOptions);
         };
 
+        const barHR = document.createElement("hr");
+            barHR.className = "bar-hr"
+            formAddProject.appendChild(barHR);
+
         const inputValider = document.createElement("input");
             inputValider.className = "input-valider";
             inputValider.type = "submit";
             inputValider.value = "Valider";
             formAddProject.appendChild(inputValider);
 
-            // MODIFICATION COULEUR BTN VALIDER SI CHAMPS REMPLI
-       if (contentAddPhoto.files && inputTitle.value && selectCategorie.value){
+            // modification couleur btn valider si tous les champs remplis
+       function colorBtnValider(){
+           if (inputAddPhoto.files && inputTitle.value && selectCategorie.value){
             inputValider.style.backgroundColor ='#1D6154';
         }
         else{
             inputValider.style.backgroundColor = "#A7A7A7";
         };
+       }
 
+        inputAddPhoto.addEventListener("input", colorBtnValider);
+        inputTitle.addEventListener("input", colorBtnValider);
+        selectCategorie.addEventListener("change", colorBtnValider);
+        colorBtnValider();
+
+            // Function fetch recuperation travaux dans la Gallery
+        function getWorksGallery(){
+            fetch("http://localhost:5678/api/works").then(dataWorks => dataWorks.json()).then(data => viewGallery(data)).catch(error => console.info(error));
+        }
+
+            // Function fetch recuperation travaux dans la Modal
+        function getWorksModal(){
+            fetch("http://localhost:5678/api/works").then(dataWorks => dataWorks.json()).then(data => contentModal(data)).catch(error => console.info(error));
+        }
 
             // AJOUT D'UN PROJET
         formAddProject.addEventListener("submit", function (event) {
             event.preventDefault();
+            // Recuperation data dans un objet formulaire
             const dataForm = new FormData();
                 dataForm.append("image", inputAddPhoto.files[0]);
                 dataForm.append("title", inputTitle.value);
                 dataForm.append("category", selectCategorie.value);
 
+            // Envoi des data à l'API
             fetch("http://localhost:5678/api/works", {
                 method: "POST",
                 headers: { Authorization: 'Bearer ' + token},
@@ -314,7 +338,9 @@ const adminModal = function() {
             })
             .then((res) => {
               if (res.ok) {
-                alert("Projet ajouté !");
+                // Affichage sans refresh la page des travaux dans la Gallery et la Modal
+                getWorksGallery();
+                getWorksModal();
                 return res.json();
               } else {
                 throw new Error(res.statusText);
@@ -323,6 +349,9 @@ const adminModal = function() {
             .catch((error) => {
               alert(error);
             });
+            // Affichage de la Gallery
+            modalAddProject.style.display = "none";
+            overlay.style.display = "none";
         });
 
             // OUVERTURE ET FERMETURE MODAL
