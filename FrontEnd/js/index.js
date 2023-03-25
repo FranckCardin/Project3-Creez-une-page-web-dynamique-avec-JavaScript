@@ -47,12 +47,11 @@ const allFilter = document.createElement("button");
 
 // Création des autres buttons en fonction de leur id
 for (let i = 0; i < dataCategories.length; i++) {
-    
     const btnFilter = document.createElement("button");
-    btnFilter.innerHTML = dataCategories[i].name;
-    btnFilter.className = "filter";
-    btnFilter.id = dataCategories[i].id;
-    filter.appendChild(btnFilter);
+        btnFilter.innerHTML = dataCategories[i].name;
+        btnFilter.className = "filter";
+        btnFilter.id = dataCategories[i].id;
+        filter.appendChild(btnFilter);
     
     // Affichage des éléments avec la fonction .onclick
     btnFilter.onclick = function () {
