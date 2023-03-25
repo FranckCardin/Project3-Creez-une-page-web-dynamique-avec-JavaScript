@@ -49,66 +49,66 @@ const adminModal = function() {
     if (token) {
         // Affichage elements
         const displayModalNav = document.querySelector('.displayModalNav');
-        header.style.marginTop = "60px";
-        displayModalNav.style.display = "flex";
+            header.style.marginTop = "60px";
+            displayModalNav.style.display = "flex";
         const displayModalEditImg = document.querySelector('.displayBtnEditIntroImg');
-        displayModalEditImg.style.display = "flex";
+            displayModalEditImg.style.display = "flex";
         const displayModalEditArticle = document.querySelector('.displayBtnEditIntroArticle');
-        displayModalEditArticle.style.display = "flex";
+            displayModalEditArticle.style.display = "flex";
         const displayFilters = document.querySelector(".filters");
-        displayFilters.style.display = "none";
+            displayFilters.style.display = "none";
         
         const projets = document.querySelector(".projets");
 
         // Creation bouton modifier et icone
         const btnEditModal = document.createElement("button");
-        btnEditModal.className = "modal-btn displayBtnEdit btn-edit";
-        btnEditModal.innerHTML = "modifier";
-        btnEditModal.style.display = "flex";
-        projets.appendChild(btnEditModal);
+            btnEditModal.className = "modal-btn displayBtnEdit btn-edit";
+            btnEditModal.innerHTML = "modifier";
+            btnEditModal.style.display = "flex";
+            projets.appendChild(btnEditModal);
         
         const iconeEdit = document.createElement("i");
-        iconeEdit.className = "icon-edit fa-regular fa-pen-to-square";
-        btnEditModal.appendChild(iconeEdit);
+            iconeEdit.className = "icon-edit fa-regular fa-pen-to-square";
+            btnEditModal.appendChild(iconeEdit);
 
         // MODAL
         // Creation overlay
         const overlay = document.createElement("div");
-        overlay.className = "overlay";
-        projets.appendChild(overlay);
+            overlay.className = "overlay";
+            projets.appendChild(overlay);
         
         // Creation modal
         const modalGallery = document.createElement("aside");
-        modalGallery.className = "modal";
-        projets.appendChild(modalGallery);
+            modalGallery.className = "modal";
+            projets.appendChild(modalGallery);
         
         // Ouverture Modal
         const openModalGallery = document.querySelector(".btn-edit");
-        openModalGallery.addEventListener("click", function (event) {
-            overlay.style.display = "block";
-            modalGallery.style.display = "inline";
-        });
+            openModalGallery.addEventListener("click", function (event) {
+                overlay.style.display = "block";
+                modalGallery.style.display = "inline";
+            });
         
         //MODAL GALLERY
         // Creation du contenu de la modal        
         const closeModalGallery = document.createElement("button");
-        closeModalGallery.className = "close-modal-gallery";
-        modalGallery.appendChild(closeModalGallery);
+            closeModalGallery.className = "close-modal-gallery";
+            modalGallery.appendChild(closeModalGallery);
         
         const iconeCloseModalGallery = document.createElement("i");
-        iconeCloseModalGallery.className = "icon-close-modal-gallery fa-solid fa-xmark";
-        closeModalGallery.appendChild(iconeCloseModalGallery);
+            iconeCloseModalGallery.className = "icon-close-modal-gallery fa-solid fa-xmark";
+            closeModalGallery.appendChild(iconeCloseModalGallery);
         
         const titleModalGallery = document.createElement("h3");
-        titleModalGallery.className = "title-modal-gallery";
-        titleModalGallery.innerHTML = "Galerie Photo"
-        modalGallery.appendChild(titleModalGallery);
+            titleModalGallery.className = "title-modal-gallery";
+            titleModalGallery.innerHTML = "Galerie Photo"
+            modalGallery.appendChild(titleModalGallery);
         
         
         // Recuperation des projets
         const modalContent = document.createElement("div");
-        modalContent.className = "list-projects"
-        modalGallery.appendChild(modalContent);
+            modalContent.className = "list-projects"
+            modalGallery.appendChild(modalContent);
         
         function contentModal(dataWorks) {
             modalContent.innerHTML = "";
@@ -140,14 +140,14 @@ const adminModal = function() {
                             .then((response) => {
                                 if (response.ok) {
                                 getWorksGallery();
+                                getWorksModal();
                                 }else{
                                     throw new Error("Erreur lors de la suppression du projet");
                                 }
                             })
-                            modalContent.removeChild(document.getElementById(dataWorks[i].id));
                         }
-
                     });
+
                 const iconArrow = document.createElement("i");
                     iconArrow.className = "icon-arrow fa-solid fa-arrows-up-down-left-right";
                     modalContent.firstChild.appendChild(iconArrow);
@@ -277,7 +277,7 @@ const adminModal = function() {
 
         // Ajout d'une option vide
         const emptyFirstOption = document.createElement("option");
-        selectCategorie.appendChild(emptyFirstOption);
+            selectCategorie.appendChild(emptyFirstOption);
         for (let i = 0; i < dataCategories.length; i++) {
             // Création des balises "OPTION".
             const categoryListModaleOptions = document.createElement("option");
@@ -396,7 +396,6 @@ const adminModal = function() {
 
         // Modification du login en logout
         document.getElementById("login").innerHTML = "logout";
-
         // Effacement du sessionStorage quand l'utilisateur se déconnecte 
         document.getElementById("login").addEventListener("click", function logout(){
             window.sessionStorage.removeItem('token');
@@ -404,7 +403,7 @@ const adminModal = function() {
             location.href = "../html/index.html";
         });
         }else{
-        document.getElementById("login").addEventListener("click", function login(){
+            document.getElementById("login").addEventListener("click", function login(){
             location.href = "../html/login.html";
         });
     }
